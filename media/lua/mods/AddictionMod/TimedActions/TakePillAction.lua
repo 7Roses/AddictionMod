@@ -31,17 +31,18 @@ function TakePillAction:perform()
 	--self.character:getBodyDamage():JustTookPill(self.item);
     -- needed to remove from queue / start next.
 	--self.item:setCount(self.item:getCount() + 1);
-	print("and now we call the logic behind the pills..");
-	NicotinePatch.onUseItem(self.character,self.item);
+	print("and now we call the logic behind the action..");
+	self.onPreform(self.character,sefl.item);
 	ISBaseTimedAction.perform(self);
 end
 
-function TakePillAction:new (character, item, time)
+function TakePillAction:new (character, item,onPreform, time)
 	local o = {}
 	setmetatable(o, self)
 	self.__index = self
 	o.character = character;
 	o.item = item;
+	o.onPreform = onPreform;
 	o.stopOnWalk = false;
 	o.stopOnRun = false;
 	o.maxTime = time;

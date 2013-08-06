@@ -1,0 +1,27 @@
+module AddictionMod
+{
+	imports
+	{
+		Base
+	}
+	
+	item Adrenaline
+	{
+		Weight	=	0.2,
+		Type	=	Drainable,
+		UseDelta	=	0.1,
+		UseWhileEquipped	=	FALSE,
+		DisplayName	=	Adrenaline in a bottle,
+		Icon	=	PillsPainkiller,
+	}
+
+	item NicotinePatch
+	{
+		Weight	=	0.2,
+		Type	=	Drainable,
+		UseDelta	=	0.1,
+		UseWhileEquipped	=	FALSE,
+		DisplayName	=	No smoke smoke,
+		Icon	=	PillsPainkiller,		
+	}
+}
