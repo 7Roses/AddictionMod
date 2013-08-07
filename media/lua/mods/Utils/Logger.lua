@@ -9,14 +9,12 @@ Logger.FINE = 2;
 Logger.INFO = 3;
 Logger.SEVERE = 4;
 Logger.logmessageFormat = {};
-Logger.logmessageFormat.noParrent = "(%s) [%s] %s"; -- (loglevel) [logname] logmessage
-Logger.logmessageFormat.parrents = "%s[%s]"; -- (loglevel) logparents(multiple possible) [logname] logmessage
+Logger.logmessageFormat.noParent = "(%s) %s %s"; -- (loglevel) [logname] logmessage
+Logger.logmessageFormat.parents = "%s[%s]"; -- (loglevel) logparents(multiple possible) [logname] logmessage
 
-
-
-function Logger:getParentLogger()
+function Logger:getParentLoggerNames()
   if self.parent then
-	local parents = self.parent:getParentLogger();
+	local parents = self.parent:getParentLoggerNames();
 	table.insert(parents,1,self.parent.getName());
 	return parents;
   else
@@ -41,19 +39,37 @@ function Logger:log(loglevel,logtext)
   else
     loglvl = "unknown";
   end
-    local lognames = self:getParentLogger();
+    local lognames = self:getParentLoggerNames();
 	table.insert(lognames,1,self:getName());
-    if #lognames>1 then
-	  
+    local logstring = "";
+	if #lognames>1 then
+	  for i=1,#lognames,1 do
+	    logstring = string.format(self.loggmessageFormat.parents,logstring,lognames[i]);
+	  end
 	else
-	
+	  logstring = string.format("[%s]",lognames[1]);
 	end
+	print(string.format(self.logmessageFormat.noParent,loglvl,lognames[1],logtext));
 end
 
 function Logger:info(logtext)
-  self:log(Logger.INFO,logtext)
+  self:log(Logger.INFO,logtext);
 end
 
+function Logger:debug(logtext)
+  self:log(Logger.DEBUG,logtext);
+end
+
+function Logger:info(logtext)
+  self:log(Logger.INFO);
+end
+
+function Logger:getGlobalLogger()
+  if Logger.globalLogger == nil then
+    Logger.globalLogger = Logger:newWithName("lua");
+  end
+  return Logger.globalLogger;
+end
 
 function Logger:newWithName(name)
   local o = {}
@@ -74,10 +90,10 @@ end
 
 function Logger:new (logname,parentLogger)
   if logname and parentLogger then
-    return self:newWithName(logname);
+    return self:newWithNameAndParent(logname,parentLogger);
   elseif logname then
+    parentLogger = Logger:getGlobalLogger();
     return self:newWithName(logname);
   end
 end
 
-globalLogger = Logger:new("lua"); -- your global logger.
