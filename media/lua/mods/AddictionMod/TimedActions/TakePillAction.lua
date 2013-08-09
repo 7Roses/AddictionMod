@@ -32,7 +32,7 @@ function TakePillAction:perform()
     -- needed to remove from queue / start next.
 	--self.item:setCount(self.item:getCount() + 1);
 	print("and now we call the logic behind the action..");
-	self.onPreform(self.character,sefl.item);
+	self.onPreform(self.character,self.item);
 	ISBaseTimedAction.perform(self);
 end
 

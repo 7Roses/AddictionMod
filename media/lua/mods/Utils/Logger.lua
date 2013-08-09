@@ -10,20 +10,24 @@ Logger.INFO = 3;
 Logger.SEVERE = 4;
 Logger.logmessageFormat = {};
 Logger.logmessageFormat.noParent = "(%s) %s %s"; -- (loglevel) [logname] logmessage
-Logger.logmessageFormat.parents = "%s[%s]"; -- (loglevel) logparents(multiple possible) [logname] logmessage
+--Logger.logmessageFormat.parents = "%s[%s]"; -- (loglevel) logparents(multiple possible) [logname] logmessage
 
+
+function Logger:getName()
+  return self.name;
+end
 function Logger:getParentLoggerNames()
   if self.parent then
 	local parents = self.parent:getParentLoggerNames();
-	table.insert(parents,1,self.parent.getName());
+	table.insert(parents,1,self.parent:getName());
 	return parents;
   else
     return {};
   end
 end
 
-function Logger:log(loglevel,logtext)
-  local loglvl = nil;
+function Logger:logging(loglevel,text)
+  local loglvl = "unknown";
   if loglevel >= Logger.ALL then
     loglvl = "ALL";
   elseif loglevel >= Logger.FINER then
@@ -43,25 +47,30 @@ function Logger:log(loglevel,logtext)
 	table.insert(lognames,1,self:getName());
     local logstring = "";
 	if #lognames>1 then
+	  print("has more tan 1 name, probably you have a parent");
+	  print("amount of lognames: " .. #lognames);
 	  for i=1,#lognames,1 do
-	    logstring = string.format(self.loggmessageFormat.parents,logstring,lognames[i]);
+	    logstring = string.format("[%s]%s",lognames[i],logstring);
 	  end
 	else
-	  logstring = string.format("[%s]",lognames[1]);
+	  print("no parent so I create a normal one name name string");
+	  logstring = "["..lognames[1].."]";
 	end
-	print(string.format(self.logmessageFormat.noParent,loglvl,lognames[1],logtext));
+	print("and now the full stringformat");
+	if not text then text="WHY O WHY IS THIS EMPTY?"; end
+	print("("..loglvl..")".. logstring .. text);
 end
 
 function Logger:info(logtext)
-  self:log(Logger.INFO,logtext);
+  Logger:logging(Logger.INFO,logtext);
 end
 
 function Logger:debug(logtext)
-  self:log(Logger.DEBUG,logtext);
+  self:logging(Logger.DEBUG,logtext);
 end
 
 function Logger:info(logtext)
-  self:log(Logger.INFO);
+  self:logging(Logger.INFO);
 end
 
 function Logger:getGlobalLogger()
@@ -93,7 +102,7 @@ function Logger:new (logname,parentLogger)
     return self:newWithNameAndParent(logname,parentLogger);
   elseif logname then
     parentLogger = Logger:getGlobalLogger();
-    return self:newWithName(logname);
+    return self:newWithNameAndParent(logname,parentLogger);
   end
 end
 
