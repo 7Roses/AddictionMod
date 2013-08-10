@@ -6,6 +6,9 @@ require "mods/AddictionMod/languageSupport/AddictionModLanguageSupport";  -- to 
 local function loadLang()
   local tbl = {};
   
+  -- console texts
+  tbl["console.loading.welcome"] = "loading AddictionMod by 7Roses";
+  
   -- ui texts
   tbl["ui.inventorymenu.takeOnePill"] = "take a pill";
   tbl["ui.inventorymenu.takeAShot"] = "take a shot"; -- for the injection items

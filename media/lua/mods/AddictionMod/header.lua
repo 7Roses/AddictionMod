@@ -15,5 +15,3 @@ AddictionMod.MOD_VERSION = "0.1.0";
 AddictionMod.MOD_AUTHOR = "7Roses";
 AddictionMod.MOD_DESCRIPTION = "some addition for an addictive playthough.";
 AddictionMod.MOD_URL = nil; -- no website at the moment.
-AddictionMod.log = Logger:new(AddictionMod.MOD_ID); -- logger is now active!
-AddictionMod.properties = {}; -- will be filled by the /mods/AddictionMod/config
