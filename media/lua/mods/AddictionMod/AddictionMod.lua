@@ -2,6 +2,20 @@
 
 require "mods/AddictionMod/header";
 
+
+
+local updateBody = function(player)
+  local bloodwork = SaveLoad("playerData","bloodwork"); -- SaveLoad is an system that can retrieve data from the modData form player or world and serialize/un-serializes your tables automatically
+  for i,substance in pairs(substances) do
+    if bloodwork[i].amount > 0 then
+	  substance.update(player);
+	end
+  end
+end
+AddictionMod.updateBody = updateBody;
+
+
+
 local load = function()
   AddictionMod.log = Logger:new(AddictionMod.MOD_ID); -- logger is now active!
   AddictionMod.log:logging(Logger.INFO,AddictionMod.getString("console.loading.welcome"));
@@ -14,6 +28,9 @@ local load = function()
   AddictionMod.log:Logging(Logger.INFO,AddictionMod.getString("console.loading.config_loaded"));
   
   
-  
+  Events.onUpdatePlayer.Add(updateBody);
 end
 AddictionMod.load = load;
+
+
+

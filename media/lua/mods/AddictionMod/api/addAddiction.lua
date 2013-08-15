@@ -18,3 +18,4 @@ local function addAddiction(properties)
   end
   
 end
+AddictionMod.addAddiction = addAddiction;
