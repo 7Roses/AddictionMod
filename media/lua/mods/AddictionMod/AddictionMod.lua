@@ -1,4 +1,9 @@
--- AddictionMod head file.
+--
+-- AddictionMod
+-- by 7Roses
+--
+--
+--
 
 require "mods/AddictionMod/header";
 
@@ -26,6 +31,14 @@ local load = function()
   AddictionMod.log:Logging(Logger.INFO,AddictionMod.getString("console.loading.config_loading"));
   configuration.loadconfig();
   AddictionMod.log:Logging(Logger.INFO,AddictionMod.getString("console.loading.config_loaded"));
+  
+  AddictionMod.substances = {}; -- init the table for all the substances properties
+  
+  AddictionMod.itemSubstanceTable = {} -- to couple substances to an item.
+  
+  
+  
+  
   
   
   Events.onUpdatePlayer.Add(updateBody);
