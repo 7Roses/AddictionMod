@@ -9,9 +9,22 @@ local function loadLang()
   -- console texts
   tbl["console.loading.welcome"] = "loading AddictionMod by 7Roses";
   
-  -- ui texts
-  tbl["ui.inventorymenu.takeOnePill"] = "take a pill";
-  tbl["ui.inventorymenu.takeAShot"] = "take a shot"; -- for the injection items
+  -- gui texts
+  tbl["gui.inventorymenu.takeOnePill"] = "take a pill";
+  tbl["gui.inventorymenu.takeAShot"] = "take a shot"; -- for the injection items
+  
+  -- 
+  
+  
+  
+  
+  
+  -- addition language files
+  --nicotine.
+  tbl["gui.traits.chainSmoker.name"] = "chain-smoker";
+  tbl["gui.traits.chainSmoker.description"] = "he began as a social smoker, but now he smoke nearly non-stop";
+  
+
   
   AddictionMod.LanguageSupport.addLangFile("EN_GB",tbl); -- the actual insertion of your langfile into the mod.
 end

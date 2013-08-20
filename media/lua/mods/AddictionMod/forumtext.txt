@@ -1,0 +1,15 @@
+AddictionMod (Work In Progress)
+
+features:
+-
+
+
+
+additional projects:
+while creating this mod I created a serie of helpfull scripts and modules.
+those [u][b]will be[/b]/are[/u] also downloadable in the topic linked here: [url=][/url]
+this are the modules splitsed of in there functionalities:
+
+- Logger: this is a module where you can specify really fast a certain logger. this makes printing debug info or severe messages possible without adding additional code to your code itself.
+- SaveLoad: a module created for loading and saving tables. it also is able to store x,y,z coordinated data inside the character or world objects data table.
+- S2T: third party script for translating a string to a table or a table to a string.

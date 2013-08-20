@@ -42,5 +42,5 @@ local function addSubstanceToItem(itemName,substanceName,amount)
   end
   table.insert(AddictionMod.itemSubstanceTable.itemName,substanceName,amount);
 end
-AddictionMod.addSubstanceToItem()
-
+AddictionMod.addSubstanceToItem = addSubstanceToItem;
+AddictionMod.addLoadingStuff = {};

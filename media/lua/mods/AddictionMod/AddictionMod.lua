@@ -16,6 +16,7 @@ local updateBody = function(player)
 	  substance.update(player);
 	end
   end
+  SaveLoad
 end
 AddictionMod.updateBody = updateBody;
 
@@ -44,6 +45,5 @@ local load = function()
   Events.onUpdatePlayer.Add(updateBody);
 end
 AddictionMod.load = load;
-
 
 
